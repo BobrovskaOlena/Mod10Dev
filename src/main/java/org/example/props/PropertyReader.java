@@ -23,7 +23,6 @@ public class PropertyReader {
                 .map(properties -> properties.getProperty("hibernate.connection.password")).orElse(null);
     }
 
-    /* Helpers */
 
     private static Optional<Properties> getProperties() {
         try (InputStream input = PropertyReader.class.getClassLoader()
@@ -32,7 +31,7 @@ public class PropertyReader {
             Properties prop = new Properties();
 
             if (input == null) {
-                System.out.println("Sorry, unable to find application.properties");
+                System.out.println("Sorry, unable to find hibernate.properties");
                 return null;
             }
 

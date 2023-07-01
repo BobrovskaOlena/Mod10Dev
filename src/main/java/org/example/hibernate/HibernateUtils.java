@@ -1,6 +1,8 @@
 package org.example.hibernate;
 
-import org.example.enitty.Worker;
+import org.example.entity.Client;
+import org.example.entity.Planet;
+import org.example.entity.Ticket;
 import org.example.props.PropertyReader;
 import org.flywaydb.core.Flyway;
 import org.hibernate.SessionFactory;
@@ -13,7 +15,9 @@ public class HibernateUtils {
 
     private HibernateUtils() {
         this.sessionFactory = new Configuration()
-                .addAnnotatedClass(Worker.class)
+                .addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Planet.class)
+                .addAnnotatedClass(Ticket.class)
                 .buildSessionFactory();
         flywayMigration(PropertyReader.getConnectionUrlForPostgres(),
                 PropertyReader.getUserForPostgres(),
@@ -31,8 +35,6 @@ public class HibernateUtils {
     public void closeSessionFactory() {
         this.sessionFactory.close();
     }
-
-    /* Flyway */
 
     private void flywayMigration(String connectionUrl, String username, String password) {
         Flyway flyway = Flyway.configure().dataSource(connectionUrl, username, password).load();
