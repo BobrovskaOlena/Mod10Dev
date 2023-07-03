@@ -1,11 +1,7 @@
 package org.example.entity;
-
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "Ticket")
 public class Ticket {

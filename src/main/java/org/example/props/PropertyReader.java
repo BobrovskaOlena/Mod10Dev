@@ -32,7 +32,7 @@ public class PropertyReader {
 
             if (input == null) {
                 System.out.println("Sorry, unable to find hibernate.properties");
-                return null;
+                return Optional.empty();
             }
 
             prop.load(input);

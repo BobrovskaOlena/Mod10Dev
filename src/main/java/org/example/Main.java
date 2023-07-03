@@ -1,36 +1,70 @@
 package org.example;
 
+import org.example.CrudServices.ClientCrudService;
+import org.example.CrudServices.PlanetCrudService;
+import org.example.entity.Client;
+import org.example.entity.Planet;
 import org.example.hibernate.HibernateUtils;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-            Session session = HibernateUtils.getInstance().getSessionFactory().openSession();
+        HibernateUtils hibernateUtils = HibernateUtils.getInstance();
+        SessionFactory sessionFactory = hibernateUtils.getSessionFactory();
+        ClientCrudService clientCrudService = new ClientCrudService(sessionFactory);
+        PlanetCrudService planetCrudService = new PlanetCrudService(sessionFactory);
 
-//        // TODO create worker
-//        Transaction transaction = session.beginTransaction();
-//            Worker newWorker = new Worker();
-//            newWorker.setName("Taras");
-//            newWorker.setBirthday(LocalDate.of(2001, 12, 21));
-//            newWorker.setSalary(5000);
-//            newWorker.setLevels(Level.MIDDLE);
-//            session.persist(newWorker);
-//        transaction.commit();
-
-//         //TODO get worker by id or list of workers
-//        Worker gettedWorker = session.get(Worker.class, 1L);
-//        System.out.println("worker ==> " + gettedWorker);
+//        // TODO create client
+//         Client client = new Client();
+//         client.setName("Artur Don");
+//         clientCrudService.createClient(client);
 //
-//        List<Worker> workers = session.createQuery("from Worker", Worker.class).list();
-//        workers.forEach(worker -> System.out.println("worker list ==> " + worker));
+//        // TODO create planet
+//        Planet planet = new Planet();
+//        planet.setId("PLU");
+//        planet.setName("Pluto");
+//        planetCrudService.createPlanet(planet);
+//
+//        //TODO get client by id
+//        Long clientId = 11L;
+//        Client retrievedClient = clientCrudService.getClient(clientId);
+//        System.out.println("Retrieved Client: " + retrievedClient.getName());
+//
+//        //TODO get planet by id
+//        String planetId = "PLU";
+//        Planet retrievedPlanet = planetCrudService.getPlanet(planetId);
+//        System.out.println("Retrieved Planet: " + retrievedPlanet.getName());
+//
+//        // TODO get all clients
+//        clientCrudService.getAllClients();
+//
+//        //TODO get all planets
+//        planetCrudService.getAllPlanets();
+//
+//        // TODO update client
+//        Client client = clientCrudService.getClient(11L);
+//        client.setName("Jane Trytenko");
+//        clientCrudService.updateClient(client);
+//        System.out.println("Updated Client: " + client.getName());
+//
+//        // TODO update planet
+//        Planet planet = planetCrudService.getPlanet("PLU");
+//        planet.setName("Pluto2");
+//        planetCrudService.updatePlanet(planet);
+//        System.out.println("Updated planet: " + planet.getName());
+//
+//        // TODO delete the client
+//        Client client = clientCrudService.getClient(11L);
+//        clientCrudService.deleteClient(client);
+//        System.out.println("Client Deleted");
+//
+//        //TODO delete the planet
+//        Planet planet = planetCrudService.getPlanet("PLU");
+//        planetCrudService.deletePlanet(planet);
+//        System.out.println("Planet Deleted");
 
-//        // TODO update worker
-//        Transaction transaction = session.beginTransaction();
-//            Worker existing = session.get(Worker.class, 1L);
-//            existing.setName("Modified Taras");
-//            session.persist(existing);
-//        transaction.commit();
-      session.close();
+
+        hibernateUtils.closeSessionFactory();
         }
     }
